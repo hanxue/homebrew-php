@@ -20,7 +20,7 @@ class Php56 < AbstractPhp
     args << "--enable-dtrace" if build.without? 'phpdbg'
     # dtrace is not compatible with phpdbg: https://github.com/krakjoe/phpdbg/issues/38
     args << "--disable-phpdbg" if build.without? 'phpdbg'
-    args << "--enable-opcache"
+    build.with 'opcache' ? args << "--enable-opcache" : args << "--disable-opcache"
   end
 
   def php_version
